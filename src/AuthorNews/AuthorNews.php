@@ -45,7 +45,7 @@ class AuthorNews
 			return 0;
 		}
 
-		$t = \NewsModel::$strTable;
+		$t = \NewsModel::getTable();
 		$arrColumns = array(
 			"$t.pid IN(" . implode(',', array_map('intval', $newsArchives)) . ")",
 			"$t.author = ?"
@@ -67,7 +67,14 @@ class AuthorNews
 			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
 		}
 
-		return \NewsModel::countBy($arrColumns, $arrValues, $arrOptions);
+		if (in_array('news_categories', \ModuleLoader::getActive()) && class_exists('NewsCategories\NewsModel'))
+		{
+			$r = new \ReflectionMethod('NewsCategories\NewsModel', 'filterByCategories');
+			$r->setAccessible(true);
+			$arrColumns = $r->invoke(new \NewsCategories\NewsModel(), $arrColumns);
+		}
+
+		return \NewsModel::countBy($arrColumns, $arrValues);
 	}
 
 
@@ -103,7 +110,7 @@ class AuthorNews
 			return null;
 		}
 
-		$t = \NewsModel::$strTable;
+		$t = \NewsModel::getTable();
 		$arrColumns = array(
 			"$t.pid IN(" . implode(',', array_map('intval', $newsArchives)) . ")",
 			"$t.author = ?"
@@ -124,6 +131,13 @@ class AuthorNews
 		{
 			$time = \Date::floorToMinute();
 			$arrColumns[] = "($t.start='' OR $t.start<='$time') AND ($t.stop='' OR $t.stop>'" . ($time + 60) . "') AND $t.published='1'";
+		}
+
+		if (in_array('news_categories', \ModuleLoader::getActive()) && class_exists('NewsCategories\NewsModel'))
+		{
+			$r = new \ReflectionMethod('NewsCategories\NewsModel', 'filterByCategories');
+			$r->setAccessible(true);
+			$arrColumns = $r->invoke(new \NewsCategories\NewsModel(), $arrColumns);
 		}
 
 		$arrOptions = array();
