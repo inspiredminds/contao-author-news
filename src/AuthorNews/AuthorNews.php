@@ -142,8 +142,8 @@ class AuthorNews
 
 		$arrOptions = array();
 		$arrOptions['order']  = "$t.date DESC";
-		$arrOptions['limit']  = $intLimit;
-		$arrOptions['offset'] = $intOffset;
+		$arrOptions['limit']  = $limit;
+		$arrOptions['offset'] = $offset;
 
 		return \NewsModel::findBy($arrColumns, $arrValues, $arrOptions);
 	}
