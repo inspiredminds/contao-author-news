@@ -11,6 +11,7 @@
  * @copyright inspiredminds 2017
  */
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['authorFilter'] = array
 (
@@ -32,6 +33,14 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['authorDefault'] = array
 	'relation'   => array('type'=>'hasOne', 'load'=>'lazy')
 );
 
-$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist'] = str_replace('skipFirst', 'skipFirst,authorFilter', $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']);
+if (class_exists(PaletteManipulator::class)) {
+	PaletteManipulator::create()
+		->addField('authorFilter', 'config_legend', PaletteManipulator::POSITION_APPEND)
+		->applyToPalette('newslist', 'tl_module')
+	;
+} else {
+	$GLOBALS['TL_DCA']['tl_module']['palettes']['newslist'] = str_replace(';{template', ',authorFilter;{template', $GLOBALS['TL_DCA']['tl_module']['palettes']['newslist']);
+}
+
 $GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'][] = 'authorFilter';
 $GLOBALS['TL_DCA']['tl_module']['subpalettes']['authorFilter'] = 'authorDefault';

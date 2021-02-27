@@ -1,39 +1,44 @@
 {
-	"name":"inspiredminds/contao-author-news",
-	"description":"Contao extension to provide an author filter for the news list.",
-	"keywords":["contao", "news", "list", "author"],
-	"type":"contao-module",
-	"homepage":"http://www.inspiredminds.at",
-	"license":"LGPL-3.0+",
-	"authors":[
-		{
-			"name":"Fritz Michael Gschwantner",
-			"homepage":"http://www.inspiredminds.at",
-			"email":"fmg@inspiredminds.at",
-			"role":"Developer"
-		}
-	],
-	"support":{
-		"email":"fmg@inspiredminds.at",
-		"issues":"https://github.com/inspiredminds/contao-author-news/issues",
-		"source":"https://github.com/inspiredminds/contao-author-news",
-		"forum":"https://community.contao.org/de"
-	},
-	"require":{
-		"php":">=5.4",
-		"contao/core-bundle":"^3.5|^4.0",
-		"contao-community-alliance/composer-plugin":"^2.4|^3.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"": "src/"
-		}
-	},
-	"extra":{
-		"contao":{
-			"sources": {
-				"contao":"system/modules/author_news"
-			}
-		}
-	}
+    "name": "inspiredminds/contao-author-news",
+    "description": "Contao extension to provide an author filter for the news list.",
+    "keywords": ["contao", "news", "list", "author"],
+    "type": "contao-module",
+    "homepage": "http://www.inspiredminds.at",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Fritz Michael Gschwantner",
+            "homepage": "http://www.inspiredminds.at",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/inspiredminds/contao-author-news/issues",
+        "source": "https://github.com/inspiredminds/contao-author-news",
+        "forum": "https://community.contao.org/de"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/fritzmg"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "contao/core-bundle": "^3.5 || ^4.4",
+        "contao/news-bundle": "^3.5 || ^4.4",
+        "contao-community-alliance/composer-plugin": "^2.4 || ^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "contao": "system/modules/author_news"
+            }
+        }
+    }
 }
