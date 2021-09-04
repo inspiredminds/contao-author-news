@@ -11,6 +11,7 @@
  * @copyright inspiredminds 2017
  */
 
+use AuthorNews\AuthorNews;
 
-$GLOBALS['TL_HOOKS']['newsListCountItems'][] = array('AuthorNews\AuthorNews', 'newsListCountItems');
-$GLOBALS['TL_HOOKS']['newsListFetchItems'][] = array('AuthorNews\AuthorNews', 'newsListFetchItems');
+array_unshift($GLOBALS['TL_HOOKS']['newsListCountItems'], [AuthorNews::class, 'newsListCountItems']);
+array_unshift($GLOBALS['TL_HOOKS']['newsListFetchItems'], [AuthorNews::class, 'newsListFetchItems']);
