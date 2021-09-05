@@ -13,5 +13,8 @@
 
 use AuthorNews\AuthorNews;
 
+$GLOBALS['TL_HOOKS']['newsListCountItems'] = $GLOBALS['TL_HOOKS']['newsListCountItems'] ?? [];
+$GLOBALS['TL_HOOKS']['newsListFetchItems'] = $GLOBALS['TL_HOOKS']['newsListFetchItems'] ?? [];
+
 array_unshift($GLOBALS['TL_HOOKS']['newsListCountItems'], [AuthorNews::class, 'newsListCountItems']);
 array_unshift($GLOBALS['TL_HOOKS']['newsListFetchItems'], [AuthorNews::class, 'newsListFetchItems']);
