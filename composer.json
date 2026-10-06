@@ -1,21 +1,18 @@
 {
     "name": "inspiredminds/contao-author-news",
     "description": "Contao extension to provide an author filter for the news list.",
-    "keywords": ["contao", "news", "list", "author"],
-    "type": "contao-module",
-    "homepage": "http://www.inspiredminds.at",
+    "type": "contao-bundle",
     "license": "LGPL-3.0-or-later",
+    "homepage": "https://github.com/inspiredminds/contao-author-news",
     "authors": [
         {
-            "name": "Fritz Michael Gschwantner",
-            "homepage": "http://www.inspiredminds.at",
-            "role": "Developer"
+            "name": "INSPIRED MINDS",
+            "homepage": "https://www.inspiredminds.at"
         }
     ],
     "support": {
         "issues": "https://github.com/inspiredminds/contao-author-news/issues",
-        "source": "https://github.com/inspiredminds/contao-author-news",
-        "forum": "https://community.contao.org/de"
+        "source": "https://github.com/inspiredminds/contao-author-news"
     },
     "funding": [
         {
@@ -24,21 +21,42 @@
         }
     ],
     "require": {
-        "php": "^5.4 || ^7.1 || ^8.0",
-        "contao/core-bundle": "^3.5 || ^4.4",
-        "contao/news-bundle": "^3.5 || ^4.4",
-        "contao-community-alliance/composer-plugin": "^2.4 || ^3.0"
+        "php": ">=8.1",
+        "contao/core-bundle": "^4.13 || ^5.0 || ^6.0",
+        "contao/news-bundle": "^4.13 || ^5.0 || ^6.0",
+        "inspiredminds/contao-news-filter-event": "^1.1"
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "InspiredMinds\\ContaoAuthorNews\\": "src/"
         }
     },
     "extra": {
-        "contao": {
-            "sources": {
-                "contao": "system/modules/author_news"
-            }
+        "contao-manager-plugin": "InspiredMinds\\ContaoAuthorNews\\ContaoManager\\Plugin",
+        "bamarni-bin": {
+            "bin-links": false,
+            "forward-command": false
         }
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.4",
+        "shipmonk/composer-dependency-analyser": "^1.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true,
+            "contao-community-alliance/composer-plugin": true,
+            "contao-components/installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": false
+        }
+    },
+    "scripts": {
+        "cs": [
+            "@rector",
+            "@ecs"
+        ],
+        "ecs": "@php vendor-bin/ecs/vendor/bin/ecs --fix",
+        "rector": "@php vendor-bin/rector/vendor/bin/rector"
     }
 }
